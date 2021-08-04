@@ -1,30 +1,72 @@
-async function getWeatherInfo(location) {
+/* eslint-disable no-console */
+async function getWeatherData(city) {
   try {
-    // Add API here to geocode
+    const geocodeResponse = await fetch(
+      // eslint-disable-next-line prefer-template
+      'https://nominatim.openstreetmap.org/?addressdetails=1&q='
+      + city
+      + '&format=json&limit=1',
+      { mode: 'cors' },
+    );
+    const geocodeData = await geocodeResponse.json();
+    const [lat, lon] = [geocodeData[0].lat, geocodeData[0].lon];
 
     const response = await fetch(
       // eslint-disable-next-line prefer-template
-      'https://api.openweathermap.org/data/2.5/onecall?lat=' + 33.44
-      + '&lon=' + -94.04
+      'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat
+      + '&lon=' + lon
       + '&exclude=minutely'
       + '&appid=f28c637b536fd0079c1b9e884e3468f3',
       { mode: 'cors' },
     );
     const data = await response.json();
 
-    // pull needed data from JSON
-    const neededData = {
-      temp_now_real: data.current.temp,
-      temp_now_feel: data.current.feels_like,
-      temp_now_humidity: data.current.humidity,
-      todays_high: data.daily[0].temp.max,
-      todays_low: data.daily[0].temp.min,
+    const weatherData = {
+      current: {
+        temp: data.current.temp,
+        feels_like: data.current.feels_like,
+        humidity: data.current.humidity,
+        todays_high: data.daily[0].temp.max,
+        todays_low: data.daily[0].temp.min,
+      },
+      daily: createDailyObject(data),
+      hourly: createHourlyObject(data),
     };
 
-    console.log(neededData);
+    console.log(weatherData);
   } catch (err) {
     console.log(err);
   }
 }
 
-getWeatherInfo('London');
+// pull daily data and return an object with high, low, weather, and weather description
+function createDailyObject(data) {
+  const dailyData = {};
+
+  for (let i = 0; i < data.daily.length; i += 1) {
+    dailyData[i] = {
+      high: data.daily[i].temp.max,
+      low: data.daily[i].temp.min,
+      weather: data.daily[i].weather[0].main,
+      weather_id: data.daily[i].weather[0].id,
+    };
+  }
+
+  return dailyData;
+}
+
+// pull hourly data and return object with temp and weather id
+function createHourlyObject(data) {
+  const hourlyData = {};
+
+  for (let i = 0; i < data.hourly.length; i += 1) {
+    hourlyData[i] = {
+      temp: data.hourly[i].temp,
+      weather_id: data.hourly[i].weather[0].id,
+    };
+  }
+
+  return hourlyData;
+}
+
+getWeatherData('Collegeville');
