@@ -1,1 +1,1 @@
-alert();
+!async function(e){try{const e=await fetch("https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=minutely&appid=f28c637b536fd0079c1b9e884e3468f3",{mode:"cors"}),t=await e.json(),o={temp_now_real:t.current.temp,temp_now_feel:t.current.feels_like,temp_now_humidity:t.current.humidity,todays_high:t.daily[0].temp.max,todays_low:t.daily[0].temp.min};console.log(t),console.log(o)}catch(e){console.log(e)}}();
