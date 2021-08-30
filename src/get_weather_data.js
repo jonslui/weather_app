@@ -10,7 +10,9 @@ async function getWeatherData(city) {
       { mode: 'cors' },
     );
     const geocodeData = await geocodeResponse.json();
-    const [lat, lon, address] = [geocodeData[0].lat, geocodeData[0].lon, geocodeData[0].address];
+    const [lat, lon, address] = [geocodeData[0].lat,
+      geocodeData[0].lon,
+      geocodeData[0].display_name];
 
     const response = await fetch(
       // eslint-disable-next-line prefer-template
@@ -38,6 +40,7 @@ async function getWeatherData(city) {
     };
 
     console.log(weatherData);
+    return weatherData;
   } catch (err) {
     console.log(err);
   }
