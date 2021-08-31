@@ -1,3 +1,13 @@
 #today {
   display: grid;
 }
+
+#top_bar{
+  display: flex;
+}
+
+#location_input{
+  flex-grow: 1;
+}
+#submit_button{
+}
