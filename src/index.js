@@ -15,6 +15,14 @@ async function startPageLoad() {
   }
 }
 
+// clears all containers other than the topbar from the screen on click
+function clearNodes() {
+  const contentContainer = document.getElementById('content');
+  while (contentContainer.childNodes.length > 1) {
+    contentContainer.removeChild(contentContainer.lastChild);
+  }
+}
+
 function createTopBar() {
   const contentContainer = document.getElementById('content');
 
@@ -30,6 +38,7 @@ function createTopBar() {
   submitButton.setAttribute('id', 'submit_button');
   submitButton.innerHTML = 'Submit';
   submitButton.addEventListener('click', () => {
+    clearNodes();
     startPageLoad();
   });
   topBar.appendChild(submitButton);
@@ -38,6 +47,4 @@ function createTopBar() {
 // Driver
 createTopBar();
 
-// 1. Create Top Bar // Initial display
-// 2. On submit button click, check returned info and make a decision on which page to display
-// 2a. On successful return, render all other data.
+// Create a function that clears all previous data after topbar child?

@@ -1,7 +1,3 @@
-#today {
-  display: grid;
-}
-
 #top_bar{
   display: flex;
 }
@@ -9,5 +5,39 @@
 #location_input{
   flex-grow: 1;
 }
+
 #submit_button{
+
+}
+
+#current_forecast_container{
+  display: flex;
+  border: solid;
+
+}
+
+#weather_icon{
+  flex-grow: 1;
+}
+
+#current_temperature_container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  font-size: 3vw;
+
+}
+
+#current_temp{
+  grid-column: 1 / 3;
+  grid-row: 1 / 5;
+  font-size: 10vw;
+}
+
+#feels_like{
+
+}
+
+#humidity{
+
 }

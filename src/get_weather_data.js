@@ -32,6 +32,8 @@ async function getWeatherData(city) {
         humidity: data.current.humidity,
         todays_high: data.daily[0].temp.max,
         todays_low: data.daily[0].temp.min,
+        description: data.current.weather[0].description,
+        icon: data.current.weather[0].icon,
       },
       // eslint-disable-next-line no-use-before-define
       daily: createDailyObject(data),
