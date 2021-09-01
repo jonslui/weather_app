@@ -1,5 +1,6 @@
 import getWeatherData from './get_weather_data';
 import renderTodaysForecast from './render_todays_forecast';
+import renderHourlyForecast from './render_hourly_forecast';
 
 async function startPageLoad() {
   try {
@@ -10,6 +11,7 @@ async function startPageLoad() {
     input.value = weatherData.location;
 
     renderTodaysForecast(weatherData.current);
+    renderHourlyForecast(weatherData.hourly);
   } catch (err) {
     console.log(err);
   }

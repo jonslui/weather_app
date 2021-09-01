@@ -41,7 +41,7 @@ async function getWeatherData(city) {
       hourly: createHourlyObject(data),
     };
 
-    console.log(weatherData);
+    console.log(data);
     return weatherData;
   } catch (err) {
     // return err;
@@ -65,12 +65,16 @@ function createDailyObject(data) {
 
 // pull hourly data and return object with temp and weather id
 function createHourlyObject(data) {
-  const hourlyData = {};
+  const hourlyData = {
+    timezone_offset: data.timezone_offset,
+  };
 
   for (let i = 0; i < data.hourly.length; i += 1) {
     hourlyData[i] = {
+      time: data.hourly[i].dt,
       temp: data.hourly[i].temp,
-      weather_id: data.hourly[i].weather[0].id,
+      icon: data.hourly[i].weather[0].icon,
+      precipitation_prob: data.hourly[i].pop,
     };
   }
 
