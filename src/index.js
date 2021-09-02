@@ -40,7 +40,6 @@ function createTopBar() {
 
   const locationInput = document.createElement('input');
   locationInput.setAttribute('id', 'location_input');
-  topBar.appendChild(locationInput);
 
   const submitButton = document.createElement('button');
   submitButton.setAttribute('id', 'submit_button');
@@ -50,7 +49,9 @@ function createTopBar() {
     clearNodes();
     startPageLoad();
   });
+
   topBar.appendChild(submitButton);
+  topBar.appendChild(locationInput);
 }
 
 function checkLocalStorage() {
