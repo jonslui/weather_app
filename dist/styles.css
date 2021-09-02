@@ -1,24 +1,24 @@
 #top_bar{
   display: flex;
 }
-
 #location_input{
   flex-grow: 1;
 }
-
 #submit_button{
 
 }
+
+
+
+
 
 #current_forecast_container{
   display: flex;
 
 }
-
 #weather_icon{
   flex-grow: 1;
 }
-
 #current_temperature_container{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -26,21 +26,22 @@
   font-size: 3vw;
 
 }
-
 #current_temp{
   grid-column: 1 / 3;
   grid-row: 1 / 5;
   font-size: 10vw;
   text-align: center;
 }
-
 #feels_like{
 
 }
-
 #humidity{
 
 }
+
+
+
+
 
 #hourly_forecast_container{
   display: flex;
@@ -65,4 +66,26 @@
 .hourly_temp{
   text-align: center;
   /* font-size: 2vw; */
+}
+
+
+
+
+#daily_forecast_container {
+  display: flex;
+}
+.day_container{
+  flex-grow: 1;
+}
+.daily_weather_icon{
+
+}
+.day_name {
+  text-align: center;
+}
+.max_temp{
+  text-align: center;
+}
+.min_temp{
+  text-align: center;
 }

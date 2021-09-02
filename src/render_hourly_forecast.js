@@ -4,8 +4,6 @@ function renderHourlyForecast(hourlyData) {
   document.getElementById('content').appendChild(hourlyForecastContainer);
 
   populateHourlyForecastContainer(hourlyData, hourlyForecastContainer);
-
-  console.log(hourlyData);
 }
 
 // both variables are in seconds

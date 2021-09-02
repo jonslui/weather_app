@@ -41,7 +41,6 @@ async function getWeatherData(city) {
       hourly: createHourlyObject(data),
     };
 
-    console.log(data);
     return weatherData;
   } catch (err) {
     // return err;
@@ -49,14 +48,16 @@ async function getWeatherData(city) {
 }
 
 function createDailyObject(data) {
-  const dailyData = {};
+  const dailyData = {
+    timezone_offset: data.timezone_offset,
+  };
 
   for (let i = 0; i < data.daily.length; i += 1) {
     dailyData[i] = {
       high: data.daily[i].temp.max,
       low: data.daily[i].temp.min,
-      weather: data.daily[i].weather[0].main,
-      weather_id: data.daily[i].weather[0].id,
+      icon: data.daily[i].weather[0].icon,
+      time: data.daily[i].dt,
     };
   }
 
