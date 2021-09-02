@@ -2,8 +2,6 @@ function renderDailyForecast(dailyData) {
   const dailyForecastContainer = document.createElement('div');
   dailyForecastContainer.setAttribute('id', 'daily_forecast_container');
   document.getElementById('content').appendChild(dailyForecastContainer);
-
-  console.log(dailyData);
   populateDailyForecastContainer(dailyData, dailyForecastContainer);
 }
 
@@ -25,12 +23,12 @@ function populateDailyForecastContainer(dailyData, container) {
 
     const maxTemp = document.createElement('div');
     maxTemp.setAttribute('class', 'max_temp');
-    maxTemp.innerHTML = dailyData[i].high;
+    maxTemp.innerHTML = dailyData[i].high +'°';
     dayContainer.appendChild(maxTemp);
 
     const minTemp = document.createElement('div');
     minTemp.setAttribute('class', 'min_temp');
-    minTemp.innerHTML = dailyData[i].low;
+    minTemp.innerHTML = dailyData[i].low + '°';
     dayContainer.appendChild(minTemp);
   }
 }

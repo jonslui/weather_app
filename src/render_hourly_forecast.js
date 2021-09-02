@@ -24,7 +24,7 @@ function populateHourlyForecastContainer(hourlyData, container) {
 
     if (hourlyData[i].precipitation_prob > 0) {
       const probOfRain = document.createElement('div');
-      probOfRain.innerHTML = (hourlyData[i].precipitation_prob * 100) + '%';
+      probOfRain.innerHTML = (Math.round(hourlyData[i].precipitation_prob * 100)) + '%';
       probOfRain.setAttribute('class', 'prob_of_rain');
       hourlyForecast.appendChild(probOfRain);
     }
@@ -34,7 +34,7 @@ function populateHourlyForecastContainer(hourlyData, container) {
     hourlyForecast.appendChild(hourlyIcon);
 
     const hourlyTemp = document.createElement('div');
-    hourlyTemp.innerHTML = hourlyData[i].temp;
+    hourlyTemp.innerHTML = hourlyData[i].temp + '°';
     hourlyTemp.setAttribute('class', 'hourly_temp');
     hourlyForecast.appendChild(hourlyTemp);
   }

@@ -14,12 +14,12 @@ function renderTodaysForecast(todaysData) {
 
   // clean this up?
   const currentTemp = document.createElement('div');
-  currentTemp.innerHTML = todaysData.temp;
+  currentTemp.innerHTML = todaysData.temp + '°';
   currentTemp.setAttribute('id', 'current_temp');
   currentTemperatureContainer.appendChild(currentTemp);
 
   const feelsLike = document.createElement('div');
-  feelsLike.innerHTML = 'Feels like:' + '\n' + todaysData.feels_like;
+  feelsLike.innerHTML = 'Feels like:' + '\n' + todaysData.feels_like + '°';
   feelsLike.setAttribute('id', 'feels_like');
   currentTemperatureContainer.appendChild(feelsLike);
 
@@ -34,11 +34,11 @@ function renderTodaysForecast(todaysData) {
   currentForecastContainer.appendChild(highLowContainer);
 
   const high = document.createElement('div');
-  high.innerHTML = 'H: ' + todaysData.todays_high;
+  high.innerHTML = 'H: ' + todaysData.todays_high + '°';
   currentTemperatureContainer.appendChild(high);
 
   const low = document.createElement('div');
-  low.innerHTML = 'L: ' + todaysData.todays_low;
+  low.innerHTML = 'L: ' + todaysData.todays_low + '°';
   currentTemperatureContainer.appendChild(low);
 }
 

@@ -1,36 +1,44 @@
+body{
+  background-color: #84C0C6;
+  font-family: 'Fira Sans', sans-serif;
+}
 #top_bar{
   display: flex;
 }
 #location_input{
   flex-grow: 1;
+  border: none;
 }
 #submit_button{
-
+  border: none;
+  background-color:#BCC1BA;
 }
-
 
 
 
 
 #current_forecast_container{
   display: flex;
-
+  text-align: center;
+  /* direction: rtl; */
 }
 #weather_icon{
-  flex-grow: 1;
+  height: 150px;
+  width: 150px;
 }
 #current_temperature_container{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  font-size: 3vw;
+  font-size: 2vw;
 
 }
 #current_temp{
   grid-column: 1 / 3;
   grid-row: 1 / 5;
-  font-size: 10vw;
+  font-size: 8vw;
   text-align: center;
+  margin: auto;
 }
 #feels_like{
 
@@ -45,7 +53,7 @@
 
 #hourly_forecast_container{
   display: flex;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 #hourly_forecast{
@@ -73,19 +81,20 @@
 
 #daily_forecast_container {
   display: flex;
+  padding-top: 2vw;
+  overflow: auto;
+  text-align:center;
+
+
 }
 .day_container{
   flex-grow: 1;
 }
 .daily_weather_icon{
-
 }
 .day_name {
-  text-align: center;
 }
 .max_temp{
-  text-align: center;
 }
 .min_temp{
-  text-align: center;
 }
