@@ -61,17 +61,21 @@ function createTopBar() {
   const fahrenheit = document.createElement('button');
   fahrenheit.setAttribute('id', 'fahrenheit');
   fahrenheit.innerHTML = 'F';
-  fahrenheit.addEventListener('click', (() => {
-    setLocalStorageTempScale('F');
-    clearNodes();
-    startPageLoad(kToF);
-  }));
 
   const celsius = document.createElement('button');
   celsius.setAttribute('id', 'celsius');
   celsius.innerHTML = 'C';
+
+  fahrenheit.addEventListener('click', (() => {
+    setLocalStorageTempScale('F');
+    setScaleButtonColors('F', fahrenheit, celsius);
+    clearNodes();
+    startPageLoad(kToF);
+  }));
+
   celsius.addEventListener('click', (() => {
     setLocalStorageTempScale('C');
+    setScaleButtonColors('C', fahrenheit, celsius);
     clearNodes();
     startPageLoad(kToC);
   }));
@@ -82,6 +86,16 @@ function createTopBar() {
   topBar.appendChild(locationInput);
 }
 
+function setScaleButtonColors(scale, fButton, cButton) {
+  if (scale === 'F') {
+    fButton.style.opacity = 1;
+    cButton.style.opacity = 0.4;
+  } else {
+    cButton.style.opacity = 1;
+    fButton.style.opacity = 0.4;
+  }
+}
+
 function checkLocalStorage() {
   const location = localStorage.getItem('location');
   const tempScale = localStorage.getItem('scale');
@@ -89,6 +103,9 @@ function checkLocalStorage() {
   if (tempScale == null) {
     setLocalStorageTempScale('F');
   }
+
+  // should this be here?
+  setScaleButtonColors(tempScale, document.getElementById('fahrenheit'), document.getElementById('celsius'));
 
   if (location != null) {
     document.getElementById('location_input').value = location;
