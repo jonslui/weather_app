@@ -29,6 +29,20 @@ body{
   font-family: 'Fira Sans', sans-serif;
   margin-left: 5px;
 }
+#fahrenheit{
+  border: none;
+  background-color:#BCC1BA;
+  font-family: 'Fira Sans', sans-serif;
+  width: 14pt;
+  margin-left: 5px;
+}
+#celsius{
+  border: none;
+  background-color:#BCC1BA;
+  font-family: 'Fira Sans', sans-serif;
+  width: 14pt;
+  
+}
 
 
 

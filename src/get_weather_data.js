@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 // pull daily data and return an object with high, low, weather, and weather description
-async function getWeatherData(city) {
+async function getWeatherData(city, convert) {
   try {
     const geocodeResponse = await fetch(
       // eslint-disable-next-line prefer-template
@@ -27,18 +27,18 @@ async function getWeatherData(city) {
     const weatherData = {
       location: address,
       current: {
-        temp: data.current.temp,
-        feels_like: data.current.feels_like,
+        temp: convert(data.current.temp),
+        feels_like: convert(data.current.feels_like),
         humidity: data.current.humidity,
-        todays_high: data.daily[0].temp.max,
-        todays_low: data.daily[0].temp.min,
+        todays_high: convert(data.daily[0].temp.max),
+        todays_low: convert(data.daily[0].temp.min),
         description: data.current.weather[0].description,
         icon: data.current.weather[0].icon,
       },
       // eslint-disable-next-line no-use-before-define
-      daily: createDailyObject(data),
+      daily: createDailyObject(data, convert),
       // eslint-disable-next-line no-use-before-define
-      hourly: createHourlyObject(data),
+      hourly: createHourlyObject(data, convert),
     };
 
     return weatherData;
@@ -47,15 +47,15 @@ async function getWeatherData(city) {
   }
 }
 
-function createDailyObject(data) {
+function createDailyObject(data, convert) {
   const dailyData = {
     timezone_offset: data.timezone_offset,
   };
 
   for (let i = 0; i < data.daily.length; i += 1) {
     dailyData[i] = {
-      high: data.daily[i].temp.max,
-      low: data.daily[i].temp.min,
+      high: convert(data.daily[i].temp.max),
+      low: convert(data.daily[i].temp.min),
       icon: data.daily[i].weather[0].icon,
       time: data.daily[i].dt,
     };
@@ -65,7 +65,7 @@ function createDailyObject(data) {
 }
 
 // pull hourly data and return object with temp and weather id
-function createHourlyObject(data) {
+function createHourlyObject(data, convert) {
   const hourlyData = {
     timezone_offset: data.timezone_offset,
   };
@@ -73,7 +73,7 @@ function createHourlyObject(data) {
   for (let i = 0; i < data.hourly.length; i += 1) {
     hourlyData[i] = {
       time: data.hourly[i].dt,
-      temp: data.hourly[i].temp,
+      temp: convert(data.hourly[i].temp),
       icon: data.hourly[i].weather[0].icon,
       precipitation_prob: data.hourly[i].pop,
     };
