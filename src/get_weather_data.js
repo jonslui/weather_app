@@ -58,6 +58,7 @@ function createDailyObject(data, convert) {
       low: convert(data.daily[i].temp.min),
       icon: data.daily[i].weather[0].icon,
       time: data.daily[i].dt,
+      chance_of_rain: data.daily[i].pop,
     };
   }
 

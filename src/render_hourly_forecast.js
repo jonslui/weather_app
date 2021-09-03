@@ -22,12 +22,12 @@ function populateHourlyForecastContainer(hourlyData, container) {
     hour.setAttribute('class', 'hour');
     hourlyForecast.appendChild(hour);
 
-    if (hourlyData[i].precipitation_prob > 0) {
-      const probOfRain = document.createElement('div');
-      probOfRain.innerHTML = (Math.round(hourlyData[i].precipitation_prob * 100)) + '%';
-      probOfRain.setAttribute('class', 'prob_of_rain');
-      hourlyForecast.appendChild(probOfRain);
-    }
+    // if (hourlyData[i].precipitation_prob > 0) {
+    //   const probOfRain = document.createElement('div');
+    //   probOfRain.innerHTML = (Math.round(hourlyData[i].precipitation_prob * 100)) + '%';
+    //   probOfRain.setAttribute('class', 'prob_of_rain');
+    //   hourlyForecast.appendChild(probOfRain);
+    // }
     const hourlyIcon = document.createElement('img');
     hourlyIcon.src = 'http://openweathermap.org/img/wn/' + hourlyData[i].icon +'@2x.png'
     hourlyIcon.setAttribute('class', 'hourly_icon');
@@ -37,6 +37,13 @@ function populateHourlyForecastContainer(hourlyData, container) {
     hourlyTemp.innerHTML = hourlyData[i].temp + '°';
     hourlyTemp.setAttribute('class', 'hourly_temp');
     hourlyForecast.appendChild(hourlyTemp);
+
+    if (hourlyData[i].precipitation_prob > 0) {
+      const probOfRain = document.createElement('div');
+      probOfRain.innerHTML = (Math.round(hourlyData[i].precipitation_prob * 100)) + '%';
+      probOfRain.setAttribute('class', 'prob_of_rain');
+      hourlyForecast.appendChild(probOfRain);
+    }
   }
 }
 

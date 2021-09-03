@@ -97,6 +97,7 @@ function setScaleButtonColors(scale, fButton, cButton) {
 }
 
 function checkLocalStorage() {
+  const locationInput = document.getElementById('location_input');
   const location = localStorage.getItem('location');
   const tempScale = localStorage.getItem('scale');
 
@@ -108,8 +109,10 @@ function checkLocalStorage() {
   setScaleButtonColors(tempScale, document.getElementById('fahrenheit'), document.getElementById('celsius'));
 
   if (location != null) {
-    document.getElementById('location_input').value = location;
-    return tempScale === 'F' ? startPageLoad(kToF) : startPageLoad(kToC);
+    locationInput.value = location;
+    tempScale === 'F' ? startPageLoad(kToF) : startPageLoad(kToC);
+  } else {
+    locationInput.placeholder = 'Enter location here';
   }
 }
 

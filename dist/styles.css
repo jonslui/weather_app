@@ -145,6 +145,10 @@ body{
 }
 .day_name {
 }
+.daily_precip_prob{
+  color: aqua;
+  height: 19px;
+}
 .max_temp{
 }
 .min_temp{
