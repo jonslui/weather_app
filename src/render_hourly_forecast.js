@@ -1,14 +1,10 @@
+// This function is exported to index.js where it's called to populate the hourly container.
+// It recieves an object containing an array of hours and the timezone offset.
 function renderHourlyForecast(hourlyData) {
   const hourlyForecastContainer = document.createElement('div');
   hourlyForecastContainer.setAttribute('id', 'hourly_forecast_container');
   document.getElementById('content').appendChild(hourlyForecastContainer);
-
   populateHourlyForecastContainer(hourlyData, hourlyForecastContainer);
-}
-
-// both variables are in seconds
-function unixTimeToHours(unixTime, timezoneOffset) {
-  return (((unixTime + timezoneOffset) / 3600) % 24);
 }
 
 function populateHourlyForecastContainer(hourlyData, container) {
@@ -22,12 +18,6 @@ function populateHourlyForecastContainer(hourlyData, container) {
     hour.setAttribute('class', 'hour');
     hourlyForecast.appendChild(hour);
 
-    // if (hourlyData[i].precipitation_prob > 0) {
-    //   const probOfRain = document.createElement('div');
-    //   probOfRain.innerHTML = (Math.round(hourlyData[i].precipitation_prob * 100)) + '%';
-    //   probOfRain.setAttribute('class', 'prob_of_rain');
-    //   hourlyForecast.appendChild(probOfRain);
-    // }
     const hourlyIcon = document.createElement('img');
     hourlyIcon.src = 'http://openweathermap.org/img/wn/' + hourlyData[i].icon +'@2x.png'
     hourlyIcon.setAttribute('class', 'hourly_icon');
@@ -38,13 +28,18 @@ function populateHourlyForecastContainer(hourlyData, container) {
     hourlyTemp.setAttribute('class', 'hourly_temp');
     hourlyForecast.appendChild(hourlyTemp);
 
-    if (hourlyData[i].precipitation_prob > 0) {
+    if (hourlyData[i].chance_of_rain > 0) {
       const probOfRain = document.createElement('div');
       probOfRain.innerHTML = (Math.round(hourlyData[i].precipitation_prob * 100)) + '%';
-      probOfRain.setAttribute('class', 'prob_of_rain');
+      probOfRain.setAttribute('class', 'hourly_chance_of_rain');
       hourlyForecast.appendChild(probOfRain);
     }
   }
+}
+
+// both variables are in seconds, converts from Unix time to the corresponding hour
+function unixTimeToHours(unixTime, timezoneOffset) {
+  return (((unixTime + timezoneOffset) / 3600) % 24);
 }
 
 export default renderHourlyForecast;

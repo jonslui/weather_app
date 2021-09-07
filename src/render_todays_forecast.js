@@ -1,18 +1,21 @@
+// This function is exported to index.js where it's called to populate todays container.
+// It recieves an object containing relevant data.
+// creates a flex box container that the icon is added to along with a grid container that holds
+// the numerical data.
 function renderTodaysForecast(todaysData) {
   const currentForecastContainer = document.createElement('div');
-  currentForecastContainer.setAttribute('id', 'current_forecast_container');
+  currentForecastContainer.setAttribute('id', 'todays_forecast_container');
   document.getElementById('content').appendChild(currentForecastContainer);
 
   const currentTemperatureContainer = document.createElement('div');
-  currentTemperatureContainer.setAttribute('id', 'current_temperature_container');
+  currentTemperatureContainer.setAttribute('id', 'todays_temperature_container');
   currentForecastContainer.appendChild(currentTemperatureContainer);
 
   const weatherIcon = document.createElement('img');
   weatherIcon.src = 'http://openweathermap.org/img/wn/' + todaysData.icon +'@2x.png';
-  weatherIcon.setAttribute('id', 'weather_icon');
+  weatherIcon.setAttribute('id', 'todays_weather_icon');
   currentForecastContainer.appendChild(weatherIcon);
 
-  // clean up add labels
   const currentTemp = document.createElement('div');
   currentTemp.innerHTML = todaysData.temp + '°';
   currentTemp.setAttribute('id', 'current_temp');
@@ -28,18 +31,14 @@ function renderTodaysForecast(todaysData) {
   humidity.setAttribute('id', 'humidity');
   currentTemperatureContainer.appendChild(humidity);
 
-  const highLowContainer = document.createElement('div');
-  highLowContainer.setAttribute('id', 'high_low_container');
-  currentForecastContainer.appendChild(highLowContainer);
-
   const high = document.createElement('div');
   high.setAttribute('id', 'todays_high');
-  high.innerHTML = 'H: ' + todaysData.todays_high + '°';
+  high.innerHTML = 'H: ' + todaysData.high + '°';
   currentTemperatureContainer.appendChild(high);
 
   const low = document.createElement('div');
   low.setAttribute('id', 'todays_low');
-  low.innerHTML = 'L: ' + todaysData.todays_low + '°';
+  low.innerHTML = 'L: ' + todaysData.low + '°';
   currentTemperatureContainer.appendChild(low);
 }
 

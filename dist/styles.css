@@ -1,6 +1,5 @@
 body{
   background-image: linear-gradient(#84C0C6, #BCC1BA);
-  /* background-color: #84C0C6; */
   font-family: 'Fira Sans', sans-serif;
 }
 
@@ -8,15 +7,12 @@ body{
   display: flex;
   font-family: 'Fira Sans', sans-serif;
   direction: rtl;
-
 }
 #location_input{
-  /* flex-grow: 1; */
   width: 595px;
   border: none;
   background-color: #84C0C6;
   font-family: 'Fira Sans', sans-serif;
-  /* text-align: right; */
   font-size: 12pt;
 }
 #location_input:hover{
@@ -44,7 +40,7 @@ body{
 
 
 
-#current_forecast_container{
+#todays_forecast_container{
   display: flex;
   text-align: center;
   direction: rtl;
@@ -53,15 +49,15 @@ body{
   scrollbar-width:none;
   -ms-overflow-style: none;
 }
-#current_forecast_container::-webkit-scrollbar{ /* WebKit */
+#todays_forecast_container::-webkit-scrollbar{ /* WebKit */
   width: 0;
   height: 0;
 }
-#weather_icon{
+#todays_weather_icon{
   height: 150px;
   width: 150px;
 }
-#current_temperature_container{
+#todays_temperature_container{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -109,9 +105,8 @@ body{
 }
 .hour{
   text-align: center;
-  /* font-size: 2vw; */
 }
-.prob_of_rain{
+.hourly_chance_of_rain{
   text-align:center;
   color: aqua;
 }
@@ -120,7 +115,6 @@ body{
 }
 .hourly_temp{
   text-align: center;
-  /* font-size: 2vw; */
 }
 
 

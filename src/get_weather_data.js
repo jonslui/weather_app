@@ -1,9 +1,7 @@
-/* eslint-disable no-console */
-// pull daily data and return an object with high, low, weather, and weather description
+// pull todays, hourly, and daily data + return an object with corresponding weather data
 async function getWeatherData(city, convert) {
   try {
     const geocodeResponse = await fetch(
-      // eslint-disable-next-line prefer-template
       'https://nominatim.openstreetmap.org/?addressdetails=1&q='
       + city
       + '&format=json&limit=1',
@@ -15,7 +13,6 @@ async function getWeatherData(city, convert) {
       geocodeData[0].display_name];
 
     const response = await fetch(
-      // eslint-disable-next-line prefer-template
       'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat
       + '&lon=' + lon
       + '&exclude=minutely'
@@ -26,27 +23,32 @@ async function getWeatherData(city, convert) {
 
     const weatherData = {
       location: address,
-      current: {
-        temp: convert(data.current.temp),
-        feels_like: convert(data.current.feels_like),
-        humidity: data.current.humidity,
-        todays_high: convert(data.daily[0].temp.max),
-        todays_low: convert(data.daily[0].temp.min),
-        description: data.current.weather[0].description,
-        icon: data.current.weather[0].icon,
-      },
-      // eslint-disable-next-line no-use-before-define
+      current: createTodayObject(data, convert),
       daily: createDailyObject(data, convert),
-      // eslint-disable-next-line no-use-before-define
       hourly: createHourlyObject(data, convert),
     };
 
     return weatherData;
   } catch (err) {
-    // return err;
+    alert('Check your spelling!');
   }
 }
 
+// creates an object with todays data from the API calls
+function createTodayObject(data, convert) {
+  const todaysData = {
+    temp: convert(data.current.temp),
+    feels_like: convert(data.current.feels_like),
+    humidity: data.current.humidity,
+    high: convert(data.daily[0].temp.max),
+    low: convert(data.daily[0].temp.min),
+    icon: data.current.weather[0].icon,
+  };
+
+  return todaysData;
+}
+
+// creates an object with daily data from the API calls
 function createDailyObject(data, convert) {
   const dailyData = {
     timezone_offset: data.timezone_offset,
@@ -65,7 +67,7 @@ function createDailyObject(data, convert) {
   return dailyData;
 }
 
-// pull hourly data and return object with temp and weather id
+// creates an object with hourly data from the API calls
 function createHourlyObject(data, convert) {
   const hourlyData = {
     timezone_offset: data.timezone_offset,
@@ -76,7 +78,7 @@ function createHourlyObject(data, convert) {
       time: data.hourly[i].dt,
       temp: convert(data.hourly[i].temp),
       icon: data.hourly[i].weather[0].icon,
-      precipitation_prob: data.hourly[i].pop,
+      chance_of_rain: data.hourly[i].pop,
     };
   }
 

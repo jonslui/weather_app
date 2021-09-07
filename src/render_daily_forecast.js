@@ -1,3 +1,5 @@
+// This function is exported to index.js where it's called to populate the day container.
+// It recieves an object containing an array of 7 days and the timezone offset.
 function renderDailyForecast(dailyData) {
   const dailyForecastContainer = document.createElement('div');
   dailyForecastContainer.setAttribute('id', 'daily_forecast_container');
@@ -40,6 +42,7 @@ function populateDailyForecastContainer(dailyData, container) {
   }
 }
 
+// converts from UNIX time to the corresponding day of the week using the locations timezone offset
 function unixTimeToWeekday(unixTime, timezoneOffset) {
   return new Date((unixTime * 1000) + (timezoneOffset * 1000)).toLocaleString('en-US', {
     weekday: 'long',
