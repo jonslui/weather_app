@@ -10,7 +10,7 @@ This weather app uses two APIs and async/await functions. The first, Nominatim, 
 
 ## Demo Video
 
-<!-- VIDEO -->
+https://user-images.githubusercontent.com/34390833/132401776-57cce01f-65df-4753-bb55-161d09c4e60b.mov
 
 ## Usage
 
