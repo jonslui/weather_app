@@ -30,7 +30,7 @@ function populateHourlyForecastContainer(hourlyData, container) {
 
     if (hourlyData[i].chance_of_rain > 0) {
       const probOfRain = document.createElement('div');
-      probOfRain.innerHTML = (Math.round(hourlyData[i].precipitation_prob * 100)) + '%';
+      probOfRain.innerHTML = (Math.round(hourlyData[i].chance_of_rain * 100)) + '%';
       probOfRain.setAttribute('class', 'hourly_chance_of_rain');
       hourlyForecast.appendChild(probOfRain);
     }
