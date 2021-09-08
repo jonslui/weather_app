@@ -37,7 +37,7 @@ function populateHourlyForecastContainer(hourlyData, container) {
   }
 }
 
-// both variables are in seconds, converts from Unix time to the corresponding hour
+// both variables are in seconds, converts from Unix time to corresponding hour
 function unixTimeToHours(unixTime, timezoneOffset) {
   return (((unixTime + timezoneOffset) / 3600) % 24);
 }
