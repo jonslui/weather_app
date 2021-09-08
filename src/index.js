@@ -2,22 +2,37 @@ import getWeatherData from './get_weather_data';
 import renderTodaysForecast from './render_todays_forecast';
 import renderHourlyForecast from './render_hourly_forecast';
 import renderDailyForecast from './render_daily_forecast';
+import createLoader from './create_loader';
+
+// API key (hidden) -- stored in the dist folder under config.js
+const key = config.OpenWeatherMapApiKey;
 
 // Retrieves Data from APIs and renders their data
 async function retrieveAndRenderData(convert) {
   try {
+    // load animation added when async/await function is called
+    const loader = createLoader();
+
+    // get address to search
     const input = document.getElementById('location_input');
-    const weatherData = await getWeatherData(input.value, convert);
+
+    // start async api calls and return weather data
+    const weatherData = await getWeatherData(input.value, convert, key);
 
     // update currently displayed address
     input.value = weatherData.location;
     setLocalStorageLocation(weatherData.location);
 
+    // render data
     renderTodaysForecast(weatherData.current);
     renderHourlyForecast(weatherData.hourly);
     renderDailyForecast(weatherData.daily);
+
+    // removes load animation after rendering complete
+    loader.remove();
   } catch (err) {
-    console.log(err);
+    // when an error is caught, remove the loading animation
+    document.getElementsByClassName('loader')[0].remove();
   }
 }
 
@@ -55,15 +70,21 @@ function createTopBar() {
   fahrenheit.addEventListener('click', (() => {
     setLocalStorageTempScale('F');
     setScaleButtonColors('F', fahrenheit, celsius);
-    clearNodes();
-    retrieveAndRenderData(kToF);
+
+    if (locationInput.value !== '') {
+      clearNodes();
+      retrieveAndRenderData(kToF);
+    }
   }));
 
   celsius.addEventListener('click', (() => {
     setLocalStorageTempScale('C');
     setScaleButtonColors('C', fahrenheit, celsius);
-    clearNodes();
-    retrieveAndRenderData(kToC);
+
+    if (locationInput.value !== '') {
+      clearNodes();
+      retrieveAndRenderData(kToC);
+    };
   }));
 
   topBar.appendChild(celsius);
@@ -74,7 +95,7 @@ function createTopBar() {
 
 // Adjusts Temperature Metric buttons according to which is active
 function setScaleButtonColors(scale, fButton, cButton) {
-  if (scale === 'F') {
+  if (scale === 'F' || null) {
     fButton.style.opacity = 1;
     cButton.style.opacity = 0.4;
   } else {
@@ -105,10 +126,11 @@ function setLocalStorageTempScale(scale) {
 function checkLocalStorage() {
   const locationInput = document.getElementById('location_input');
   const location = localStorage.getItem('location');
-  const tempScale = localStorage.getItem('scale');
+  let tempScale = localStorage.getItem('scale');
 
   if (tempScale == null) {
-    setLocalStorageTempScale('F');
+    tempScale = 'F';
+    setLocalStorageTempScale(tempScale);
   }
 
   setScaleButtonColors(tempScale, document.getElementById('fahrenheit'), document.getElementById('celsius'));

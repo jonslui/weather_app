@@ -11,6 +11,7 @@ body{
 #location_input{
   width: 595px;
   border: none;
+  outline: none;
   background-color: #84C0C6;
   font-family: 'Fira Sans', sans-serif;
   font-size: 12pt;
@@ -20,12 +21,14 @@ body{
 }
 #submit_button{
   border: none;
+  outline: none;
   background-color:#BCC1BA;
   font-family: 'Fira Sans', sans-serif;
   margin-left: 5px;
 }
 #fahrenheit{
   border: none;
+  outline: none;
   background-color:#BCC1BA;
   font-family: 'Fira Sans', sans-serif;
   width: 14pt;
@@ -33,11 +36,28 @@ body{
 }
 #celsius{
   border: none;
+  outline: none;
   background-color:#BCC1BA;
   font-family: 'Fira Sans', sans-serif;
   width: 14pt;
 }
 
+
+.loader {
+  border: 4px solid #d1d4cf;
+  border-top: 4px solid #f06c4c;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 50px;
+  
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 
 #todays_forecast_container{

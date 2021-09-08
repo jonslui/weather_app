@@ -1,5 +1,5 @@
 // pull todays, hourly, and daily data + return an object with corresponding weather data
-async function getWeatherData(city, convert) {
+async function getWeatherData(city, convert, key) {
   try {
     const geocodeResponse = await fetch(
       'https://nominatim.openstreetmap.org/?addressdetails=1&q='
@@ -16,7 +16,7 @@ async function getWeatherData(city, convert) {
       'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat
       + '&lon=' + lon
       + '&exclude=minutely'
-      + '&appid=f28c637b536fd0079c1b9e884e3468f3',
+      + '&appid=' + key,
       { mode: 'cors' },
     );
     const data = await response.json();
