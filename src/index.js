@@ -5,7 +5,9 @@ import renderDailyForecast from './render_daily_forecast';
 import createLoader from './create_loader';
 
 // API key (hidden) -- stored in the dist folder under config.js
-const key = config.OpenWeatherMapApiKey;
+// const key = config.OpenWeatherMapApiKey;
+// (made visible for hosting on github pages)
+const key = 'f28c637b536fd0079c1b9e884e3468f3';
 
 // Retrieves Data from APIs and renders their data
 async function retrieveAndRenderData(convert) {
