@@ -9,7 +9,6 @@ import createLoader from './create_loader';
 // (made visible for hosting on github pages)
 const key = 'f28c637b536fd0079c1b9e884e3468f3';
 
-
 // Retrieves Data from APIs and renders their data
 async function retrieveAndRenderData(convert) {
   try {
